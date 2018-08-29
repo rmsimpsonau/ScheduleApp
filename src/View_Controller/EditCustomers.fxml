@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.EditCustomersController">
+   <children>
+      <TableView fx:id="customersTable" layoutX="15.0" layoutY="100.0" prefHeight="430.0" prefWidth="900.0">
+        <columns>
+          <TableColumn fx:id="customerIdCol" editable="false" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="customerNameCol" editable="false" minWidth="130.0" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="addressCol" minWidth="130.0" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="addressTwoCol" minWidth="130.0" prefWidth="75.0" text="Address 2" />
+            <TableColumn fx:id="cityCol" minWidth="100.0" prefWidth="75.0" text="City" />
+            <TableColumn fx:id="postalCodeCol" minWidth="85.0" prefWidth="75.0" text="Postal Code" />
+            <TableColumn fx:id="countryCol" minWidth="20.0" prefWidth="75.0" text="Country" />
+            <TableColumn fx:id="phoneCol" minWidth="120.0" prefWidth="75.0" text="Phone" />
+        </columns>
+      </TableView>
+      <Label layoutX="361.0" layoutY="14.0" text="Customers">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="backToScheduleViewButton1" layoutX="550.0" layoutY="544.0" mnemonicParsing="false" onAction="#addCustomer" prefWidth="60.0" text="Add" />
+      <Button fx:id="backToScheduleViewButton2" layoutX="635.0" layoutY="544.0" mnemonicParsing="false" onAction="#editCustomer" prefWidth="60.0" text="Edit" />
+      <Button fx:id="backToScheduleViewButton" layoutX="801.0" layoutY="544.0" mnemonicParsing="false" onAction="#showScheduleView" prefWidth="60.0" text="Back" />
+      <Button fx:id="deleteUserButton" layoutX="717.0" layoutY="544.0" mnemonicParsing="false" onAction="#deleteCustomer" prefWidth="60.0" text="Delete" />
+   </children>
+</AnchorPane>

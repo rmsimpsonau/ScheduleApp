@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ReportsViewController">
+   <children>
+      <Label alignment="CENTER" layoutX="38.0" layoutY="14.0" prefHeight="53.0" prefWidth="875.0" text="Reports" textAlignment="CENTER">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="resultTextArea" editable="false" layoutX="14.0" layoutY="131.0" prefHeight="498.0" prefWidth="922.0" wrapText="true" />
+      <ButtonBar layoutX="66.0" layoutY="76.0" prefHeight="40.0" prefWidth="819.0">
+         <buttons>
+            <Button fx:id="consultantSchedulesButton" minWidth="250.0" mnemonicParsing="false" text="Consultant Schedules" />
+            <Button fx:id="appointmentsByMonthButton" minWidth="250.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="381.0" text="Appointment Types By Month" />
+            <Button fx:id="appointmentsByCustomerButton" minWidth="250.0" mnemonicParsing="false" text="Appointments By Customer" />
+         </buttons>
+      </ButtonBar>
+      <Button fx:id="reportBackButton" layoutX="836.0" layoutY="638.0" mnemonicParsing="false" onAction="#backToScheduleView" text="Back" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.LoginPageController">
+   <children>
+      <AnchorPane layoutX="292.0" layoutY="190.0" prefHeight="300.0" prefWidth="367.0">
+         <children>
+            <Label id="loginLabel" fx:id="loginLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="21.0" prefHeight="17.0" prefWidth="367.0" text="Login" textAlignment="CENTER" />
+            <TextField id="loginUsernameField" fx:id="loginUsernameField" layoutX="100.0" layoutY="82.0" promptText="username" />
+            <PasswordField fx:id="loginPasswordField" layoutX="101.0" layoutY="142.0" promptText="password" />
+            <Label fx:id="passwordError" layoutX="102.0" layoutY="175.0" prefHeight="35.0" prefWidth="264.0" textFill="RED" visible="false" wrapText="true" />
+            <Label fx:id="usernameError" layoutX="99.0" layoutY="110.0" prefHeight="27.0" prefWidth="264.0" textFill="RED" visible="false" wrapText="true" />
+            <AnchorPane layoutY="227.0" prefHeight="35.0" prefWidth="367.0">
+               <children>
+                  <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="124.0" layoutY="4.0" mnemonicParsing="false" onAction="#loginAttempt" prefHeight="27.0" prefWidth="119.0" text="Login" textAlignment="CENTER" />
+               </children>
+            </AnchorPane>
+            <Label fx:id="loginErrorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="176.0" prefHeight="50.0" prefWidth="264.0" text="Error" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

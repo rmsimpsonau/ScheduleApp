@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ScheduleViewController">
+   <children>
+      <Label fx:id="userWelcomeText" alignment="CENTER_RIGHT" layoutX="762.0" layoutY="56.0" prefHeight="40.0" prefWidth="302.0" text="Welcome, User" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="56.0">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <ButtonBar layoutX="558.0" layoutY="541.0" prefHeight="53.0" prefWidth="660.0" AnchorPane.bottomAnchor="85.0" AnchorPane.rightAnchor="14.0">
+        <buttons>
+          <Button fx:id="newAppointmentButton" mnemonicParsing="false" onAction="#newCustomer" text="New Appointment" />
+            <Button fx:id="editAppointmentButton" mnemonicParsing="false" onAction="#editAppointmentButtonClicked" text="Edit Appointment" />
+            <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" onAction="#deleteAppointment" text="Delete Appointment" />
+            <Button fx:id="editCustomersButton" mnemonicParsing="false" onAction="#showEditCustomersView" prefHeight="27.0" prefWidth="128.0" text="Edit Customers" />
+        </buttons>
+      </ButtonBar>
+      <Label alignment="CENTER" layoutX="-1.0" layoutY="23.0" prefHeight="53.0" prefWidth="875.0" text="Schedule View" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <TableView fx:id="scheduleTableView" layoutX="13.0" layoutY="141.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <columns>
+          <TableColumn fx:id="titleCol" prefWidth="132.0" text="Title" />
+          <TableColumn fx:id="descriptionCol" prefWidth="101.0" text="Description" />
+            <TableColumn fx:id="customerCol" prefWidth="105.0" text="Customer" />
+            <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="dateCol" prefWidth="103.0" text="Date" />
+            <TableColumn fx:id="startCol" prefWidth="78.0" text="Start" />
+            <TableColumn fx:id="endCol" prefWidth="65.0" text="End" />
+            <TableColumn fx:id="locationCol" prefWidth="93.0" text="Location" />
+            <TableColumn fx:id="contactCol" prefWidth="90.0" text="Contact" />
+            <TableColumn fx:id="urlCol" prefWidth="77.0" text="URL" />
+        </columns>
+      </TableView>
+      <RadioButton fx:id="monthViewRadio" layoutX="15.0" layoutY="117.0" mnemonicParsing="false" selected="true" text="Month View" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="117.0">
+         <toggleGroup>
+            <ToggleGroup fx:id="scheduleView" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="weekViewRadio" layoutX="111.0" layoutY="117.0" mnemonicParsing="false" text="Week View" toggleGroup="$scheduleView" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="117.0" />
+      <Button fx:id="logoutButton" layoutX="876.0" layoutY="102.0" mnemonicParsing="false" onAction="#logoutUser" text="Logout" />
+      <Button fx:id="reportsViewButton" layoutX="796.0" layoutY="616.0" minWidth="140.5" mnemonicParsing="false" onAction="#showReportsView" text="Reports" />
+   </children>
+</AnchorPane>

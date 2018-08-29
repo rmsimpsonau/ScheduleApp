@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AppointmentEditorController">
+   <children>
+      <Label layoutX="298.0" layoutY="14.0" text="Appointment Editor" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="43.0" />
+         </font></Label>
+      <TextField fx:id="titleTextField" layoutX="308.0" layoutY="104.0" prefHeight="27.0" prefWidth="352.0" />
+      <Label layoutX="308.0" layoutY="252.0" text="Customer" />
+      <Label layoutX="308.0" layoutY="87.0" text="Title" />
+      <Label layoutX="308.0" layoutY="140.0" text="Description" />
+      <TextArea fx:id="descriptionTextField" layoutX="308.0" layoutY="157.0" prefHeight="86.0" prefWidth="352.0" />
+      <ComboBox fx:id="customerComboBox" layoutX="308.0" layoutY="269.0" prefHeight="27.0" prefWidth="352.0" />
+      <TextField fx:id="locationTextField" layoutX="308.0" layoutY="326.0" prefHeight="27.0" prefWidth="352.0" />
+      <Label layoutX="309.0" layoutY="308.0" text="Location" />
+      <TextField fx:id="contactTextField" layoutX="308.0" layoutY="375.0" prefHeight="27.0" prefWidth="352.0" />
+      <Label layoutX="309.0" layoutY="358.0" text="Contact" />
+      <Label layoutX="309.0" layoutY="411.0" text="Type" />
+      <TextField fx:id="urlTextField" layoutX="308.0" layoutY="481.0" prefHeight="27.0" prefWidth="352.0" />
+      <ComboBox fx:id="typeComboBox" layoutX="308.0" layoutY="428.0" prefHeight="27.0" prefWidth="352.0" />
+      <Label layoutX="309.0" layoutY="464.0" text="URL" />
+      <DatePicker fx:id="meetingDate" layoutX="309.0" layoutY="542.0" prefHeight="27.0" prefWidth="107.0" />
+      <ComboBox fx:id="startTimeComboBox" layoutX="431.0" layoutY="542.0" prefHeight="27.0" prefWidth="107.0" />
+      <ComboBox fx:id="endTimeComboBox" layoutX="553.0" layoutY="542.0" prefHeight="27.0" prefWidth="107.0" />
+      <Label layoutX="310.0" layoutY="521.0" text="Date" />
+      <Label layoutX="431.0" layoutY="521.0" text="Start Time" />
+      <Button fx:id="backToScheduleViewButton" layoutX="534.0" layoutY="634.0" mnemonicParsing="false" onAction="#showScheduleView" text="Cancel" />
+      <Button fx:id="saveAppointmentButton" layoutX="612.0" layoutY="634.0" mnemonicParsing="false" onAction="#saveAppointment" text="Save" />
+      <Label layoutX="553.0" layoutY="521.0" text="End Time" />
+   </children>
+</AnchorPane>

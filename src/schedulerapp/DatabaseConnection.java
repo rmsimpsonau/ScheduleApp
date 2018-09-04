@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -24,6 +25,21 @@ import javafx.collections.ObservableList;
  * @author sim59419
  */
 public class DatabaseConnection {
+    
+    public enum SCHEDULE_VIEW_DATE_TYPE {
+        WEEK {
+            @Override
+            public String toString() {
+              return "WEEK";
+            }
+        },
+        MONTH {
+            @Override
+            public String toString() {
+              return "MONTH";
+            }
+        }
+    }
 
     private static Connection conn;
 
@@ -210,6 +226,84 @@ public class DatabaseConnection {
             query.execute();
         } catch (SQLException ex) {
             System.out.println("SqlException getting next user appointment: " + ex.getMessage());
+        }
+
+        ResultSet results = query.getResults();
+
+        while (results.next()) {
+            // Appointment Object Creation
+            IntegerProperty appointmentId = new SimpleIntegerProperty(results.getInt("appointment.appointmentId"));
+            IntegerProperty customerId = new SimpleIntegerProperty(results.getInt("customer.customerId"));
+            StringProperty customerName = new SimpleStringProperty(results.getString("customer.customerName"));
+            IntegerProperty userId = new SimpleIntegerProperty(results.getInt("appointment.userId"));
+            StringProperty title = new SimpleStringProperty(results.getString("appointment.title"));
+            StringProperty description = new SimpleStringProperty(results.getString("appointment.description"));
+            StringProperty location = new SimpleStringProperty(results.getString("appointment.location"));
+            StringProperty contact = new SimpleStringProperty(results.getString("appointment.contact"));
+            StringProperty type = new SimpleStringProperty(results.getString("appointment.type"));
+            StringProperty url = new SimpleStringProperty(results.getString("appointment.url"));
+            StringProperty start = new SimpleStringProperty(Utilities.convertFromUtcToLocal(results.getTimestamp("appointment.start").toLocalDateTime()).toString());
+            StringProperty end = new SimpleStringProperty(Utilities.convertFromUtcToLocal(results.getTimestamp("appointment.end").toLocalDateTime()).toString());
+            LocalDateTime createDate = Utilities.convertFromUtcToLocal(results.getTimestamp("appointment.createDate").toLocalDateTime());
+            StringProperty createdBy = new SimpleStringProperty(results.getString("appointment.createdBy"));
+            LocalDateTime lastUpdate = Utilities.convertFromUtcToLocal(results.getTimestamp("appointment.lastUpdate").toLocalDateTime());
+            StringProperty lastUpdateBy = new SimpleStringProperty(results.getString("lastUpdateBy"));
+
+            Appointment appointmentObj = new Appointment(
+                    appointmentId,
+                    customerId,
+                    customerName,
+                    userId,
+                    title,
+                    description,
+                    location,
+                    contact,
+                    type,
+                    url,
+                    start,
+                    end,
+                    createDate,
+                    createdBy,
+                    lastUpdate,
+                    lastUpdateBy
+            );
+            appointmentsList.add(appointmentObj);
+        }
+        return appointmentsList;
+    }
+    
+    public static ObservableList<Appointment> getAppointmentsByDateSelected(int userIdRequested, LocalDate dateSelected, SCHEDULE_VIEW_DATE_TYPE dateType) throws SQLException
+    {
+        
+        ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
+
+        DatabaseQuery query = new DatabaseQuery(
+                "SELECT appointment.appointmentId, "
+                + "appointment.title, "
+                + "appointment.description, "
+                + "appointment.location, "
+                + "appointment.contact, "
+                + "appointment.url, "
+                + "appointment.start, "
+                + "appointment.end, "
+                + "appointment.type, "
+                + "appointment.createDate, "
+                + "appointment.createdBy, "
+                + "appointment.lastUpdate, "
+                + "appointment.lastUpdateBy, "
+                + "appointment.userId, "
+                + "customer.customerId, "
+                + "customer.customerName "
+                + "FROM appointment "
+                + "INNER JOIN customer ON appointment.customerId=customer.customerId "
+                + "WHERE appointment.userId=" + userIdRequested + " "
+                + "AND " + dateType + "(appointment.start) = " + dateType.toString() + "('" + dateSelected + "');"
+        );
+        try {
+            query.printQuery();
+            query.execute();
+        } catch (SQLException ex) {
+            System.out.println("SqlException getting customer appointments: " + ex.getMessage());
         }
 
         ResultSet results = query.getResults();

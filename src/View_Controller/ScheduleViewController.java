@@ -10,6 +10,7 @@ import java.io.IOException;
 import Model.LoggedInUser;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -52,6 +55,9 @@ public class ScheduleViewController implements Initializable
     @FXML private RadioButton monthViewRadio;
     @FXML private RadioButton weekViewRadio;
     @FXML private ToggleGroup scheduleView;
+    @FXML private Label scheduleViewDatepickerLabel;
+    @FXML private DatePicker scheduleDatePicker;
+    
     // Schedule TableView
     @FXML private TableView<Appointment> scheduleTableView;
     @FXML private TableColumn<Appointment, String> titleCol;
@@ -86,12 +92,38 @@ public class ScheduleViewController implements Initializable
         monthViewRadio.setOnAction((event) -> {
             // Set view to month view
             populateTableView("month");
+            scheduleViewDatepickerLabel.setText("Month including date:");
         });
         
         // Lambda expression implementation
         weekViewRadio.setOnAction((event) -> {
             // Set view to week view
             populateTableView("week");
+            scheduleViewDatepickerLabel.setText("Week including date:");
+        });
+        
+        // Initialize datepicker
+        LocalDate currentDate = LocalDate.parse(Utilities.generateTimestamp().toString(), SchedulerApp.LOCAL_DATE_TIME_MILLISECONDS_AMPM_FORMATTER);
+        scheduleDatePicker.setValue(currentDate.minusDays(1)); // Subtract a day to make correct day display
+        // Do not allow user to pick dates before current date
+        scheduleDatePicker.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
+        
+        // Update appointments list and view when date changed
+        scheduleDatePicker.setOnAction((event) -> {
+            try {
+                populateAppointmentLists();
+                populateTableView(currentViewMode);
+            } catch (SQLException ex) {
+                Logger.getLogger(ScheduleViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
         try {
@@ -172,8 +204,8 @@ public class ScheduleViewController implements Initializable
     
     private void populateAppointmentLists() throws SQLException
     {
-        appointmentsThisMonth = DatabaseConnection.getUserAppointments(LoggedInUser.USER_ID, Utilities.generateTimestamp().plusDays(30));
-        appointmentsThisWeek = DatabaseConnection.getUserAppointments(LoggedInUser.USER_ID, Utilities.generateTimestamp().plusDays(7));
+        appointmentsThisMonth = DatabaseConnection.getAppointmentsByDateSelected(LoggedInUser.USER_ID, scheduleDatePicker.getValue(), DatabaseConnection.SCHEDULE_VIEW_DATE_TYPE.MONTH);
+        appointmentsThisWeek = DatabaseConnection.getAppointmentsByDateSelected(LoggedInUser.USER_ID, scheduleDatePicker.getValue(), DatabaseConnection.SCHEDULE_VIEW_DATE_TYPE.WEEK);
     }
     
     private void populateTableView(String view)

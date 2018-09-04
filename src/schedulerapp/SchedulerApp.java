@@ -32,6 +32,7 @@ public class SchedulerApp extends Application {
     // Formatters
     public static final DateTimeFormatter LOCAL_DATE_TIME_AMPM_FORMATTER = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm a", DEFAULT_LOCALE);
     public static final DateTimeFormatter LOCAL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm", DEFAULT_LOCALE);
+    public static final DateTimeFormatter LOCAL_DATE_TIME_MILLISECONDS_AMPM_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", DEFAULT_LOCALE);
     public static final DateTimeFormatter LOCAL_DATE_TIME_SECONDS_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", DEFAULT_LOCALE);
     public static final DateTimeFormatter LOCAL_DATE_TIME_MILLISECONDS_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S", DEFAULT_LOCALE);
     public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
